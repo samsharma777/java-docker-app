@@ -27,7 +27,10 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/java-docker-app:v1 .
-      
-
-   
+        run: |
+          docker build \
+            -f .docker/http/Dockerfile \
+            --target my-target \
+            --label my-label \
+            -t ${{ secrets.DOCKER_USERNAME }}/java-docker-app:v1 \
+            .
